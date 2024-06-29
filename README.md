@@ -2,7 +2,17 @@
 
 `LazyWaterfallGrid`是一个懒加载的瀑布流组件，可以用于显示大量数据。
 
-## 示例代码
+
+
+
+## Installation
+`LazyWaterfallGrid` is available through Swift Package Manager. To install it, simply add LazyWaterfallGrid to your Package.swift file and run swift package update.
+
+`https://github.com/golove/LazyWaterfallGrid.git`
+
+
+
+## Example
 
 ```swift
 import SwiftUI
