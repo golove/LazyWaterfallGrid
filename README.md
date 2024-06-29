@@ -2,6 +2,10 @@
 
 `LazyWaterfallGrid`是一个懒加载的瀑布流组件，可以用于显示大量数据。
 
+<img width="319" alt="Screenshot 2024-06-29 at 17 58 52" src="https://github.com/golove/LazyWaterfallGrid/assets/61925349/a32a2de5-87bd-4aec-bd41-5afe8853705a">
+<img width="339" alt="Screenshot 2024-06-29 at 17 58 15-1" src="https://github.com/golove/LazyWaterfallGrid/assets/61925349/c98188fd-8db4-47db-b913-97a8dbc06e90">
+<img width="329" alt="Screenshot 2024-06-29 at 17 58 24" src="https://github.com/golove/LazyWaterfallGrid/assets/61925349/c139be5e-f667-4bb4-bcc3-a06ed3f37fa5">
+
 
 
 
@@ -55,9 +59,5 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 ```
-<<<<<<< HEAD
-<img width="319" alt="Screenshot 2024-06-29 at 17 58 52" src="https://github.com/golove/LazyWaterfallGrid/assets/61925349/a32a2de5-87bd-4aec-bd41-5afe8853705a">
-<img width="339" alt="Screenshot 2024-06-29 at 17 58 15-1" src="https://github.com/golove/LazyWaterfallGrid/assets/61925349/c98188fd-8db4-47db-b913-97a8dbc06e90">
-<img width="329" alt="Screenshot 2024-06-29 at 17 58 24" src="https://github.com/golove/LazyWaterfallGrid/assets/61925349/c139be5e-f667-4bb4-bcc3-a06ed3f37fa5">
->>>>>>> 
+
 
