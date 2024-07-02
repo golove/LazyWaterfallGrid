@@ -25,10 +25,11 @@ public struct LazyWaterfallGrid<Content: View, Data: RandomAccessCollection>: Vi
 	struct NewItem {
 		var item: Data.Element
 		var height: CGFloat
+		var width:CGFloat
 	}
 	
 	var newItems: [[NewItem]] {
-		let width = UIScreen.main.bounds.width / CGFloat(column)
+		let width = (UIScreen.main.bounds.width - spacing * CGFloat(column + 1)) / CGFloat(column)
 		var colsHeight = Array(repeating: CGFloat(0), count: column)
 		var arr = Array(repeating: [NewItem](), count: column)
 		
@@ -36,7 +37,7 @@ public struct LazyWaterfallGrid<Content: View, Data: RandomAccessCollection>: Vi
 			let itemHeight = complete(width, item)
 			if let minIndex = colsHeight.firstIndex(of: colsHeight.min()!) {
 				colsHeight[minIndex] += itemHeight
-				arr[minIndex].append(NewItem(item: item, height: itemHeight))
+				arr[minIndex].append(NewItem(item: item, height: itemHeight,width: width))
 			}
 		}
 		
@@ -44,16 +45,17 @@ public struct LazyWaterfallGrid<Content: View, Data: RandomAccessCollection>: Vi
 	}
 	
 	public var body: some View {
-		HStack(alignment: .top, spacing: spacing) {
+		HStack(alignment: .top,spacing: spacing) {
 			ForEach(Array(newItems.enumerated()), id: \.offset) { index, items in
-				LazyVStack(spacing: spacing) {
+				LazyVStack(spacing:spacing) {
 					ForEach(items, id: \.item.id) { newItem in
 						content(newItem.item)
-							.frame(height: newItem.height)
+							.frame(width: newItem.width,height: newItem.height)
+							.clipped()
 					}
 				}
 			}
-		}
+		}.padding(spacing)
 	}
 }
 
@@ -112,7 +114,7 @@ struct Item: Identifiable {
 			}.buttonStyle(BorderedButtonStyle())
 		}
 		ScrollView{
-			LazyWaterfallGrid(items: items,column: $column,complete: {width,item in
+			LazyWaterfallGrid(items: items,column: $column,spacing: 6,complete: {width,item in
 				item.height
 			} ,content: {e in
 				ZStack{
