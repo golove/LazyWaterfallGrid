@@ -34,12 +34,8 @@ public struct LazyWaterfallGrid<Content: View, Data: RandomAccessCollection>: Vi
 	}
 	
 	var newItems: [[NewItem]] {
-<<<<<<< HEAD
-		let width = (UIScreen.main.bounds.width - spacing * CGFloat(column + 1)) / CGFloat(column)
-=======
-//		let width = (UIScreen.main.bounds.width - spacing * CGFloat(column + 1)) / CGFloat(column)
+
 		let width = (mainWidth - spacing * CGFloat(column + 1)) / CGFloat(column)
->>>>>>> 87340c6 (fixed spacing)
 		var colsHeight = Array(repeating: CGFloat(0), count: column)
 		var arr = Array(repeating: [NewItem](), count: column)
 		
@@ -124,20 +120,6 @@ struct Item: Identifiable {
 				}
 			}.buttonStyle(BorderedButtonStyle())
 		}
-<<<<<<< HEAD
-		ScrollView{
-			LazyWaterfallGrid(items: items,column: $column,spacing: 6,complete: {width,item in
-				item.height
-			} ,content: {e in
-				ZStack{
-					
-					Rectangle()
-						.fill( .pink )
-					Text("\(e.title)")
-						.foregroundStyle(.white)
-				}
-			})
-=======
 	GeometryReader{porxy in
 		// on macOS need divide scroll action tool width, example: let width = porxy.frame(in: .local).width - 14
 		let width = porxy.frame(in: .local).width - 14
@@ -154,7 +136,6 @@ struct Item: Identifiable {
 					}
 				})
 			}
->>>>>>> 87340c6 (fixed spacing)
 		}
 	
 	

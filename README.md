@@ -43,13 +43,23 @@ struct ContentView: View {
 	   ]
     @State private	var column = 2
     var body: some View {
-        LazyWaterfallGrid(items: items, column: $column, spacing: 6, complete: { width, item in
-            return item.height  // return CGFloat.random(in: 100..<300)
-          
-        }, content: { item in
-            Text("\(item.title)")
-               
-        }) 
+      	GeometryReader{porxy in
+		// on macOS need divide scroll action tool width, example: let width = porxy.frame(in: .local).width - 14
+		let width = porxy.frame(in: .local).width - 14
+			ScrollView{
+				LazyWaterfallGrid(mainWidth:width, items: items,column: $column,spacing: 6,complete: {width,item in
+					item.height
+				} ,content: {e in
+					ZStack{
+						
+						Rectangle()
+							.fill( .pink )
+						Text("\(e.title)")
+							.foregroundStyle(.white)
+					}
+				})
+			}
+		}
     }
 }
 
