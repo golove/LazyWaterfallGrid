@@ -4,8 +4,12 @@
 
 import SwiftUI
 
-@available(iOS 14,*)
+
+
+
+@available(iOS 14.0, macOS 13.0, *)
 public struct LazyWaterfallGrid<Content: View, Data: RandomAccessCollection>: View where Data.Element: Identifiable {
+	var mainWidth:CGFloat
 	var items: Data
 	@Binding var column: Int
 	var spacing: CGFloat
@@ -14,7 +18,8 @@ public struct LazyWaterfallGrid<Content: View, Data: RandomAccessCollection>: Vi
 	
 	
 	
-	public init(items: Data, column: Binding<Int>, spacing: CGFloat = 6, complete: @escaping (CGFloat, Data.Element) -> CGFloat, content: @escaping (Data.Element) -> Content) {
+	public init(mainWidth:CGFloat,items: Data, column: Binding<Int>, spacing: CGFloat = 6, complete: @escaping (CGFloat, Data.Element) -> CGFloat, content: @escaping (Data.Element) -> Content) {
+		self.mainWidth = mainWidth
 		self.items = items
 		self._column = column
 		self.spacing = spacing
@@ -29,7 +34,12 @@ public struct LazyWaterfallGrid<Content: View, Data: RandomAccessCollection>: Vi
 	}
 	
 	var newItems: [[NewItem]] {
+<<<<<<< HEAD
 		let width = (UIScreen.main.bounds.width - spacing * CGFloat(column + 1)) / CGFloat(column)
+=======
+//		let width = (UIScreen.main.bounds.width - spacing * CGFloat(column + 1)) / CGFloat(column)
+		let width = (mainWidth - spacing * CGFloat(column + 1)) / CGFloat(column)
+>>>>>>> 87340c6 (fixed spacing)
 		var colsHeight = Array(repeating: CGFloat(0), count: column)
 		var arr = Array(repeating: [NewItem](), count: column)
 		
@@ -68,10 +78,11 @@ struct Item: Identifiable {
 	var height:CGFloat
 }
 
-@available(iOS 18,*)
+@available(iOS 18,macOS 15,*)
 #Preview
 {
 	@Previewable @State	var column = 2
+	
 	
 	let items: [Item] = [
 		Item(title: "Item 1",height:160),
@@ -113,6 +124,7 @@ struct Item: Identifiable {
 				}
 			}.buttonStyle(BorderedButtonStyle())
 		}
+<<<<<<< HEAD
 		ScrollView{
 			LazyWaterfallGrid(items: items,column: $column,spacing: 6,complete: {width,item in
 				item.height
@@ -125,6 +137,24 @@ struct Item: Identifiable {
 						.foregroundStyle(.white)
 				}
 			})
+=======
+	GeometryReader{porxy in
+		// on macOS need divide scroll action tool width, example: let width = porxy.frame(in: .local).width - 14
+		let width = porxy.frame(in: .local).width - 14
+			ScrollView{
+				LazyWaterfallGrid(mainWidth:width, items: items,column: $column,spacing: 6,complete: {width,item in
+					item.height
+				} ,content: {e in
+					ZStack{
+						
+						Rectangle()
+							.fill( .pink )
+						Text("\(e.title)")
+							.foregroundStyle(.white)
+					}
+				})
+			}
+>>>>>>> 87340c6 (fixed spacing)
 		}
 	
 	
